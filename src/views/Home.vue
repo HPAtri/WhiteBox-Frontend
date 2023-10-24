@@ -5,11 +5,12 @@
        <div class="hot">
          <h2>热门游戏</h2>
          <div class="more-btn" @click="toIndex">查看全部</div>
-         </div>
+       </div>
+      <div>{{gameList[0].id}}</div>
       <div class="game" v-for="(item,index) in gameList" :key="index" @click="toGame(item.id)">
         <img :src="item.cover" class="game-img">
         <h6 class="game-name">{{item.name}}</h6>
-        <!-- <span class="classify" v-for="(item2,index2) in item.attributes.classify" :key="index2">{{item2}}</span> -->
+        <!-- <span class="classify" v-for="(item,index2) in item.attributes.classify" :key="index2">{{item2}}</span> -->
       </div>
     </div>
 
@@ -59,8 +60,8 @@ export default {
       // },
 
       getNew(){
-      axios({
-        url:"http://192.168.137.230:10086/game/querygames", 
+        axios({
+        url:"http://127.0.0.1:10086/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -72,7 +73,7 @@ export default {
           releaseTime:"2020-01-01 00:00:00"
         }})
         .then(res=>{
-          this.gameList = res.data.GameList
+          this.gameList = res.data.data.GameList
         })
     },
       getloverecommend(){
