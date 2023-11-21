@@ -1,5 +1,5 @@
 {
-  "name": "gameinfo",
+  "name": "WhiteBox",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,9 +12,11 @@
     "axios": "^1.5.1",
     "bootstrap-vue": "^2.12.0",
     "core-js": "^3.6.5",
+    "element-ui": "^2.15.14",
     "leancloud-storage": "^4.5.3",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
+    "vue-session": "^1.0.0",
     "wangeditor": "^3.1.1"
   },
   "devDependencies": {
