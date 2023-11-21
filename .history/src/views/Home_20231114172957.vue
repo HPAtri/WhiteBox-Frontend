@@ -4,26 +4,30 @@
     <div class="games">
        <div class="hot">
          <h2>热门游戏</h2>
-         <div class="more-btn" @click="getNew()">换一批</div>
+         <div class="more-btn" @click="toIndex">查看全部</div>
        </div>
+      <div>{{gameList[0].id}}</div>
       <div class="game" v-for="(item,index) in gameList" :key="index" @click="toGame(item.id)">
         <img :src="item.cover" class="game-img">
         <h6 class="game-name">{{item.name}}</h6>
-      </div>
-    </div>
-     <div class="games">
-       <div class="hot"><h2>根据您的喜好</h2><div class="more-btn" @click="getloverecommend()">换一批</div></div>
-      <div class="game" v-for="(item,index) in loveList" :key="index" @click="toGame(item.id)">
-        <img :src="item.cover" class="game-img">
-        <h6 class="game-name">{{item.name}}</h6>
+        <!-- <span class="classify" v-for="(item,index2) in item.attributes.classify" :key="index2">{{item2}}</span> -->
       </div>
     </div>
 
-    <div class="games">
-       <div class="hot"><h2>根据您的浏览</h2><div class="more-btn" @click="getrecentrecommend()">换一批</div></div>
-      <div class="game" v-for="(item,index) in recentList" :key="index" @click="toGame(item.id)">
-        <img :src="item.cover" class="game-img">
-        <h6 class="game-name">{{item.name}}</h6>
+     <div class="games">
+       <div class="hot"><h2>根据您的喜好</h2><div class="more-btn" @click="toIndex">查看全部</div></div>
+      <div class="game" v-for="(item,index) in lovelist" :key="index" @click="toGame(item.id)">
+        <img :src="item.attributes.img.attributes.url" class="game-img">
+        <h6 class="game-name">{{item.attributes.name}}</h6>
+        <span class="classify" v-for="(item2,index2) in item.attributes.classify" :key="index2">{{item2}}</span>
+      </div>
+    </div>
+
+    <div class="information">
+       <div class="hot"><h2>根据您的浏览</h2><div class="more-btn" @click="toAbout">查看全部</div></div>
+      <div class="info" v-for="(item,index) in recentList" :key="index" @click="toGame(item.id)">
+        <img class="info-img" :src="item.attributes.img.attributes.url">
+        <div class="info-text">{{item.attributes.title}}</div>
       </div>
     </div>
   </div>
@@ -37,23 +41,27 @@ export default {
     data(){
       return{
         gameList:[],
-        recentList:[],
-        loveList:[],
+        recentlist:[],
+        lovelist:[],
       }
     },
     components: {
         Carousel
     },
-    mounted(){
-      this.getNew()
-      this.getloverecommend()
-      this.getrecentrecommend()
-    },
     methods:{
+      // getNew(){
+      //   const query = new this.$av.Query('game');
+      //   query.descending('createdAt');
+      //   query.limit(5);
+      //   query.find().then(res => {
+      //   console.log("看看",res)
+      //   this.gameList = res
+      //   });  
+      // },
 
       getNew(){
         axios({
-        url:"http://192.168.137.230:10086/games/querygames",
+        url:"http://127.0.0.1:10086/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -62,53 +70,29 @@ export default {
           name:"",
           limit:"4",
           page:"1",
-          tagId:0,
-          needTag:false,
           releaseTime:"2020-01-01 00:00:00"
         }})
         .then(res=>{
-          this.gameList = res.data.data.GameList;
+          this.gameList = res.data.data.GameList
         })
     },
-
       getloverecommend(){
-        axios({
-        url:"http://192.168.137.230:10086/games/querygames",
-        method:'post',
-        headers:{
-        'accept': "application/json",
+        const query = new this.$av.Query('game');
+        query.equalTo('love',true);
+        query.limit(5);
+        query.find().then(res => {
+        console.log("看看",res)
+        this.lovelist = res
+        });
       },
-        data:{
-          name:"",
-          limit:"4",
-          page:"1",
-          tagId:0,
-          needTag:false,
-          releaseTime:"2020-01-01 00:00:00"
-        }})
-        .then(res=>{
-          this.loveList = res.data.data.GameList;
-        })
-      },
-
       getrecentrecommend(){
-        axios({
-        url:"http://192.168.137.230:10086/games/querygames",
-        method:'post',
-        headers:{
-        'accept': "application/json",
-      },
-        data:{
-          name:"",
-          limit:"4",
-          page:"1",
-          tagId:0,
-          needTag:false,
-          releaseTime:"2020-01-01 00:00:00"
-        }})
-        .then(res=>{
-          this.recentList = res.data.data.GameList;
-        })
+        const query = new this.$av.Query('information');
+        query.descending('createdAt');
+        query.limit(4);
+        query.find().then(res => {
+        console.log("看看",res)
+        this.recentList = res
+        });
       },
       toCon(artId){
         let id = artId
@@ -129,6 +113,11 @@ export default {
           path:"/about"
         })
       }
+    },
+    created(){
+      this.getNew()
+      this.getloverecommend()
+      this.getrecentrecommend()
     }
 }
 </script>
@@ -137,7 +126,6 @@ export default {
 .home{
   margin: 0 auto;
   width:1500px;
-  padding-top: 10px;
   padding-bottom: 100px;
 }
 .hot{
@@ -157,8 +145,8 @@ export default {
   margin: 0 auto;
 }
 .games{
-  width: 90%;
-  margin: 40px;
+  width: 100%;
+  margin-top: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -167,7 +155,7 @@ export default {
 .game{
   margin-top: 40px;
   width: 280px;
-  height: 400px;
+  height: 425px;
   color: #fff;
   background: rgb(34, 34, 34);
 }

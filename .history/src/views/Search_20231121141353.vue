@@ -178,4 +178,5 @@ export default {
   box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
   cursor:pointer;
 } */
+
 </style>

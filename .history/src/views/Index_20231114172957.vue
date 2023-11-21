@@ -1,16 +1,15 @@
 <template>
-  <div class="body">
+  
+  <div class="games">
     <div class="block"></div>
       <div class="header">
       <div class="classify">
-          <div class="tagtitle"><h6>标签:</h6></div>
-          <div class="tags">
-          <h6 :class="flag=='all'?'active':''" @click="orderBy('all')" class="c-item">全部</h6>
-          <!-- <div class="tag" v-for="(item,index) in classList" :key="index" @click="changeTag(item,index)"></div> -->
+          <h5 :class="flag=='all'?'active':''" @click="orderBy('all')" class="c-item">全部</h5>
+          <h5 :class="flag=='hot'?'active':''" @click="orderBy('hot')" class="c-item">热门</h5>
+          <h5 :class="flag=='new'?'active':''" @click="orderBy('new')" class="c-item">最新</h5>
           <h6 v-for="(item,index) in classList" :key="index" 
           @click="changeTag(item,index)" :class="flag==index?'active':''"
-          class="c-item">{{item}}</h6>
-          </div>
+          class="c-item">{{item}}</h6>  
       </div>
       </div>
 
@@ -26,7 +25,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 export default {
     data(){
         return{
@@ -103,19 +101,15 @@ export default {
 </script>
 
 <style scoped>
-.body{
-  background:#fff;
-}
 .block{
   background:#fff;
   height: 120px;
 }
 .header{
-  border: 1px 1px 1px 1px rgba(0,0,0,0.6);
-  padding-top:10px;
+  padding-top:12px;
+  height:20px;
   width: 90%;
   margin: 0 auto;
-  background:#ebe7e7;
 
 }
 .main{
@@ -132,29 +126,15 @@ export default {
 }
 .classify{
     display: flex;
-    width: 90%;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 550px;
+    color: #FFF;
     margin-top:20px;
-    align-items:flex-start
-}
-.tagtitle{
-  flex: 1;
-}
-
-.tags{
-  width: auto;
-  display: flex;
-  flex: 30;
-}
-.c-item{
-  margin-left: 15px;
-  width: auto;
-  cursor:pointer;
 }
 .c-item:hover{
   color: burlywood;
-  margin-left: 15px;
-  width: auto;
-  cursor:pointer;
+  cursor:pointer;/*鼠标指针变为一个手*/ 
 }
 .game{
   margin-top: 20px;
@@ -180,6 +160,7 @@ export default {
 }
 .tags{
   width: 60px;
+  background: gray;
   height: 20px;
   margin-right: 5px;
   font-size:12px;
