@@ -38,45 +38,6 @@
   </div>
         </div>
     </div>
-    <div class="main">
-        <div class="game">
-            <img :src="cover" class="header">
-            <h3 class="name">游戏名：{{name}}</h3>
-            <div class="info">
-                <div class="info-detail">
-                  <span class="info-name">厂商：</span>
-                  <span>{{publisher}}</span>
-                </div>
-                <div class="info-detail">
-                  <span class="info-name">发行日期：</span>
-                  <span>{{releaseTime}}</span>
-                </div>
-               <div class="info-detail">
-                  <span class="info-name">平台：</span>
-                  <span>{{platform}}</span>
-                </div>
-            </div>
-            <div class="info-detail detail">
-                <span class="info-name"> 简介：</span>
-                <span>{{description}}</span>
-              </div>
-        </div>
-        <div class="extra">
-          <div class="extrabox">
-              <div class="tags"><p class="tagtittle">标签</p>
-              <div class="taglist">
-              <div class="tag" v-for="(item,index) in tagList" :key="index" @click="tagquery(item.tagId)">
-          <h6 class="game-name">{{item.tagName}}</h6>
-      </div></div></div>
-              <div class="articles"><p class="articletittle">推荐文章</p>
-                  <div class="articlelist">
-                      
-              <div class="article" v-for="(item,index) in tagList" :key="index" @click="articlequery(item.tagId)">
-          <h6 class="game-name">{{item.tagName}}</h6>
-      </div></div></div>
-  </div>
-        </div>
-    </div>
 </template>
 
 <script>
