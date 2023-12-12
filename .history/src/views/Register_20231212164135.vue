@@ -24,76 +24,72 @@
 			</div>
 		</form>
 	</div>
-</template>
-	
-<script>
-import axios from "axios";
-export default {
-	name: 'Login',
-	data(){
-		return{
-			username:'',
-			nickname:"",
-			pwd:"",
-			pwd2:"",
-		}
-	},
-	methods:{
-		clearpwd(){
-			this.pwd='';
-			this.pwd2='';
+	</template>
+	  
+	<script>
+	import axios from "axios";
+	export default {
+		name: 'Login',
+		data(){
+			return{
+				username:'',
+				nickname:"",
+				pwd:"",
+				pwd2:"",
+			}
 		},
-		rule(){
-			if(!this.nickname){
-				alert("昵称不能为空");
-				return false;
-			}
-			if(this.pwd !=this.pwd2){
-				alert("两次密码不一致");
-				this.clearpwd();
-				return false;
-			}else{
-			if(this.pwd.length>15 || this.pwd.length<8){
-				this.clearpwd();
-				alert("密码长度应在8到15");
-				return false;
-			}
-			else{
-				return true;
-			}
-		}
-		},
-		reg(){
-			let flag=this.rule()
-			let that = this
-			if(flag){
-				axios({
-				url:"http://192.168.137.230:10086/user/register",
-				method:'post',
-				headers:{'accept': "application/json"},
-				data:{
-				account:this.username,
-				userName:this.nickname,
-				password:this.pwd,
-			}
+		methods:{
+			clearpwd(){
+				this.pwd='';
+				this.pwd2='';
+			},
+			rule(){
+				if(this.pwd !=this.pwd2){
+					alert("两次密码不一致");
+					this.clearpwd();
+					return false;
+				}else{
+				if(this.pwd.length>15 || this.pwd.length<8){
+					this.clearpwd();
+					alert("密码长度应在8到15");
+					return false;
 				}
-				)
-			.then(function(res){
-			if(res.data.data.retCode == "0000"){
-				alert("注册成功，点击确定跳转登录");
-				setTimeout(function(){that.$router.push({path:"/Login"})});
-			}			
-			if(res.data.data.retCode == "9901"){
-				alert("用户名重复")
+				else{
+					return true;
+				}
 			}
-			if(res.data.data.retCode == "9900"){
-				alert("未知错误")
+			},
+			reg(){
+				let flag=this.rule()
+				let that = this
+				if(flag){
+					axios({
+					url:"http://192.168.137.230:10086/user/register",
+					method:'post',
+					headers:{'accept': "application/json"},
+					data:{
+					account:this.username,
+					userName:this.nickname,
+					password:this.pwd,
+				}
+					}
+					)
+				.then(function(res){
+				if(res.data.data.retCode == "0000"){
+					alert("注册成功，点击确定跳转登录");
+					setTimeout(function(){that.$router.push({path:"/Login"})});
+				}			
+				if(res.data.data.retCode == "9901"){
+					alert("用户名重复")
+				}
+				if(res.data.data.retCode == "9900"){
+					alert("未知错误")
+				}
+				})
 			}
-			})
 		}
 	}
-}
-}
+	}
 </script>
 
 <style scoped>

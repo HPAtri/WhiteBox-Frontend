@@ -44,10 +44,6 @@ export default {
 			this.pwd2='';
 		},
 		rule(){
-			if(!this.nickname){
-				alert("昵称不能为空");
-				return false;
-			}
 			if(this.pwd !=this.pwd2){
 				alert("两次密码不一致");
 				this.clearpwd();

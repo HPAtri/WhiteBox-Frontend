@@ -44,8 +44,8 @@ export default {
 			this.pwd2='';
 		},
 		rule(){
-			if(!this.nickname){
-				alert("昵称不能为空");
+			if(this.nickname){
+
 				return false;
 			}
 			if(this.pwd !=this.pwd2){
