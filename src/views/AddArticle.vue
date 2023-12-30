@@ -24,7 +24,13 @@
           </el-form-item>
 
           <el-form-item label="内容" prop="content">
-            <mavon-editor v-model="editForm.content"/>
+            <mavon-editor
+                class="mavon"
+                ref="md"
+                @imgAdd="$imgAdd"
+                @imgDel="$imgDel"
+                :imageFilter="uploadBefore"
+                v-model="editForm.content"/>
           </el-form-item>
           <el-switch v-model="editForm.original" active-text="原创" inactive-text="转载">
         </el-switch>
@@ -84,8 +90,32 @@ export default {
           tblogTags: [],
         }
       },
+      // mounted() {
+      //   // 如果原始md字符串中存在曾上传的图片， 则需要将对应<img>中的src替换为base64
+      //   this.$nextTick(() => {
+      //     // $vm.$imgUpdateByUrl 详情见本页末尾
+      //     this.$refs.md.$imgUpdateByUrl(0, base64内容);
+      //   })
+      // },
       props:['id'],
       methods: {
+
+        $imgAdd(pos, $file){
+          // 将图片上传到服务器
+          var formdata = new FormData();
+          formdata.append('image', $file);
+          axios({
+            url: 'http://192.168.137.44:10086/picture/save',
+            method: 'post',
+            headers: { 'Content-Type': 'multipart/form-data' },
+            data:formdata,
+          }).then((res) => {
+            // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+            // $vm.$img2Url 详情见本页末尾
+            this.$refs.md.$img2Url(pos, res.data.data.url);
+          })
+        },
+
         showInput() {
           this.inputVisible = true;
           this.$nextTick(
