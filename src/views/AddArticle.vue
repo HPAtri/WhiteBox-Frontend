@@ -100,19 +100,48 @@ export default {
       props:['id'],
       methods: {
 
+        uploadBefore(f) {
+          if (f.size > 7355608) {
+            this.$message({
+              message: "图片过大",
+              type: "error"
+            });
+            return false;
+          } else {
+            return true;
+          }
+        },
+
         $imgAdd(pos, $file){
           // 将图片上传到服务器
           var formdata = new FormData();
           formdata.append('image', $file);
+          const token =  localStorage.getItem("token");
           axios({
             url: 'http://192.168.137.44:10086/picture/save',
             method: 'post',
-            headers: { 'Content-Type': 'multipart/form-data' },
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'token':token
+            },
             data:formdata,
           }).then((res) => {
-            // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-            // $vm.$img2Url 详情见本页末尾
-            this.$refs.md.$img2Url(pos, res.data.data.url);
+            // 将返回的url替换到文本原位置![...](0) -> ![...](url)
+            if (res.status === 200) {
+              this.$refs.md.$img2Url(pos, res.data.data.url);
+            } else {
+              this.$message({
+                message: "图片上传失败",
+                type: "error"
+              }).catch(() => {
+                this.$message({
+                  message: "图片上传失败",
+                  type: "error"
+                });
+                this.$refs.md.$img2Url(pos, "");
+              });
+              this.$refs.md.$img2Url(pos, "");
+            }
           })
         },
 
