@@ -59,12 +59,20 @@ const routes = [
     component: () => import('../views/Game.vue')
   },
   {
+    path: '/content',
+    component: () => import('../views/About/Content.vue')
+  },
+  {
     path: '/search',
     component: () => import('../views/Search.vue')
   },
   {
     path: '/teach',
     component: () => import('../views/Teach.vue')
+  },
+  {
+    path: '/test',
+    component: () => import('../views/test.vue')
   }
 ]
 

@@ -6,7 +6,7 @@
           <h4 class="title">{{item.title}}</h4>
           <h6 class="content">{{item.content}}</h6>
           <div class="pictures">
-          <div v-for="(item,index) in artList[index].picture.split(' ')" :key="index">
+          <div v-for="(item,index) in pichandle(index)" :key="index">
           <img :src="item" class="article-img"></div>
         </div>
         <div class="information">
@@ -51,20 +51,30 @@ export default {
         'accept': "application/json",
     },
         data:{
-        classification:classification
+        classification:classification,
+        gameId:0,
         }})
         .then(res=>{
             this.artList = res.data.data.articleEntityList;
         })
     },
+    pichandle(index){
+      if(this.artList[index].picture != null){
+        return this.artList[index].picture.split(' ');
+      }
+      else{
+        return {}
+      }
+    },
+
     toArticle(artId){
         let id = artId
          this.$router.push({ 
-           path:'/about/content',
+           path:'/content',
            query: {id:id}
            })
       },
-      addArticle(){
+    addArticle(){
         this.$router.push({ 
            path:'/addarticle',
            })
@@ -158,6 +168,7 @@ export default {
   .content{
     font-family: "微软雅黑";
     color: #8c939d;
+
   }
   .content:hover{
     font-family: "微软雅黑";
