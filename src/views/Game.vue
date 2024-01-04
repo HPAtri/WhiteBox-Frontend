@@ -54,8 +54,9 @@
               <div class="articles"><p class="articletittle">推荐文章</p>
                   <div class="articlelist">
                       
-              <div class="article" v-for="(item,index) in tagList" :key="index" @click="articlequery(item.tagId)">
-          <h6 class="game-name">{{item.tagName}}</h6>
+              <div class="article" v-for="(item,index) in articleList" :key="index" @click="articlequery(item.articleId)">
+          <div>{{item.title}}</div>
+          <div style="margin-left: 170px;"><i class="el-icon-time">{{item.releaseTime.slice(0, 10)}}</i></div>
       </div></div></div>
   </div>
         </div>
@@ -96,8 +97,8 @@ export default {
         articlequery(articleId){
         let id = articleId
         this.$router.push({
-        path:"/home"+id,
-        //   query:{id:id}
+        path:"/content",
+        query:{id:id}
     })
         },
         // collect(gameid){
@@ -156,6 +157,20 @@ export default {
             this.releaseTime = this.gameList[0].release_time;
             this.score = this.gameList[0].score;
         })
+        axios({
+        url:"http://192.168.137.44:10086/information/queryarticles",
+        method:'post',
+        headers:{
+        'accept': "application/json",
+    },
+        data:{
+        classification:0,
+        gameId:id,
+        }})
+        .then(res=>{
+            this.articleList = res.data.data.articleEntityList;
+            console.log(this.articleList)
+        })
     },
 
 }
@@ -173,7 +188,7 @@ export default {
 }
 .game{
     width: 70%;
-    background: rgb(34,34,34);
+    background: white;
     box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
 }
 .extra{
@@ -191,7 +206,7 @@ export default {
 }
 .tags{
     width: 100%;
-    background: rgb(34,34,34);
+    background: white;
     box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
 }
 .taglist{
@@ -206,8 +221,8 @@ export default {
 .articles{
     width: 100%;
     margin-top:20px;
-    background: rgb(34,34,34);
-    box-shadow: 5px 5px 10px 5px rgba(0,0,0,2);
+    background: white;
+    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
 }
 .header{
     width: 100%;
@@ -215,7 +230,6 @@ export default {
     object-fit: cover;
 }
 .name{
-    color: #fff;
     text-align: center;
     padding-top: 20px;
 }
@@ -227,7 +241,7 @@ export default {
 .scorebox{
     width: 100%;
     margin-bottom:20px;
-    background: rgb(34,34,34);
+    background:white;
     box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
 }
 .keybox{
@@ -244,26 +258,23 @@ export default {
     font-family: 华文新魏;
 }
 .str{
-    color:white;
+    color:coral;
     font-size: 20px;
     font-family: 华文琥珀;
 }
 .tag{
-    color:   #fff;
     margin-left: 15px;
     padding-left:5px;
     padding-right:5px;
     padding-top:6px;
-    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
+    border:solid 1px;
     border-radius: 15px 15px 15px 15px;
     cursor:pointer;
 }
 .article{
-    color:   #fff;
-    margin:15px;
-    padding-left:5px;
-    padding-right:5px;
-    padding-top:6px;
+    margin:2px auto;
+    padding: 8px 24px 4px 14px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     cursor:pointer;
 }
 .articletittle{
@@ -272,7 +283,7 @@ export default {
     color: burlywood;
 }
 .info{
-    color: #fff;
+    color: black;
     font-size: 20px;
     display: flex;
     align-items: center;

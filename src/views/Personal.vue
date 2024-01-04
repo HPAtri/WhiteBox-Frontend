@@ -9,29 +9,6 @@
             <div class="user_name">
               <span> {{ nickname }} </span>
             </div>
-            <!-- <div class="user-v" v-if="v === 3"> -->
-              <!-- <img src="@/assets/img/V.png" class="user-v-img" /> -->
-              <!-- <span class="user-v-font">优质媒体作者</span>
-            </div>
-            <div class="user_qianming">
-              <span> {{ design }}</span>
-            </div>
-            <div class="user_anniu">
-            </div>
-          </div>
-          <div class="user_num"> -->
-            <!-- <div style="cursor: pointer" @click="myfan">
-              <div class="num_number">{{ fanCounts }}</div>
-              <span class="num_text">粉丝</span>
-            </div>
-            <div style="cursor: pointer" @click="myfollow">
-              <div class="num_number">{{ followCounts }}</div>
-              <span class="num_text">关注</span>
-            </div>
-            <div>
-              <div class="num_number">{{ goodCounts }}</div>
-              <span class="num_text">获赞</span>
-            </div> -->
           </div>
         </div>
       </div>
@@ -67,6 +44,21 @@
       <el-tab-pane label="收藏" name="收藏">收藏</el-tab-pane>
     </el-tabs>
       </div>
+      <el-backtop :bottom="20">
+       <div
+          style="{
+                height: 100%;
+                width: 100%;
+                background-color: #f2f5f6;
+                box-shadow: 0 0 6px rgba(0,0,0, .12);
+                text-align: center;
+                line-height: 40px;
+                color: #1989fa;
+              }"
+        >
+          UP
+       </div>
+    </el-backtop>
 </div>
 </template>
 

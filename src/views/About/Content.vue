@@ -19,23 +19,70 @@
       </div>
       </div>
     <h6 class="content">{{content}}</h6>
-  
 
+    
   </div>
 
   <div class="release">
-    <mavon-editor
+    <div><mavon-editor
               class="mavon"
               ref="md"
               @imgAdd="$imgAdd"
               @imgDel="$imgDel"
               :imageFilter="uploadBefore"
-              v-model="releaseForm.content"/>
+              v-model="releaseForm.content"
+              /></div>
+  <div style="margin-top:10px; margin-left: 820px;"><el-button type="primary" style=" height:36px;width:90px; font-size: 12px;" @click="submit()">评论</el-button>
+  </div></div>
+  <div class="comments">
+    <div class="comment" v-for="(item,index) in commentList" :key="index">
+          <div><div class="user">
+          <img v-image-preview :src="item.icon" class="userIcon"/></div>
+          <div class="userbox">
+          <div class="userName"><span style="font-size: 22px;">{{item.userName}}</span></div>
+          </div>
+      </div><div>{{item.comment}}</div>
+      </div>
   </div>
-  <div class="comment">
   </div>
-  </div>
-  <div class="author">1571095159180-9196</div>
+  <div class="extra">
+    <div class="author">
+      <div class="user">
+          <img v-image-preview :src="icon" class="userIcon"/></div>
+          <div class="userbox">
+          <div class="userName"><span style="font-size: 22px;">{{userName}}</span></div>
+          <div class="collect"><el-button type="primary" style=" height:36px;width:90px; font-size: 12px; " @click="collect(gameid)">{{collect}}</el-button></div></div>
+      </div>
+    <div class="gameInf">
+      <div class="gameName" @click="toGame()"><span style="font-size: 22px;">相关游戏</span>
+        <p style="margin-top:20px;margin-left:10px;font-size: 16px;">{{name}}</p>
+        <div class="score">
+                <div><span class="str">网友评分</span><el-rate
+                    v-model="score"
+                    disabled
+                    text-color="#ff9900">
+                </el-rate></div></div>
+      </div>
+      <div class="gamecover" @click="toGame()"><img :src="cover" class="cover"></div>
+    </div>
+
+    <el-backtop :bottom="20">
+       <div
+          style="{
+                height: 100%;
+                width: 100%;
+                background-color: #f2f5f6;
+                box-shadow: 0 0 6px rgba(0,0,0, .12);
+                text-align: center;
+                line-height: 40px;
+                color: #1989fa;
+              }"
+        >
+          UP
+       </div>
+    </el-backtop>
+</div>
+  
   <!-- <img :src="banner" alt="" class="banner">
   
   <div class="main">
@@ -63,14 +110,23 @@ export default {
       releaseForm:{
         content:"",
       },
+      commentList:{},
+      gameList:{},
+      name:"",
+      cover:"",
+      score:1,
       author:"",
       like:0,
       time:"",
       banner:'',
       flag:false,
-      likeState:true,//false时不再增加点赞数量了
+      likeState:true,
       id:'',
+      gameId:"",
       userId:"",
+      userName:"",
+      icon:"",
+      sex:"",
       gameName:"",
       title:"",
       classification:"",
@@ -78,6 +134,7 @@ export default {
       content:"",
       views:"",
       releaseTime:"",
+      collect:"收藏帖子",
     }
   },
   methods:{
@@ -99,7 +156,11 @@ export default {
             this.content = this.article.content
             this.views = this.article.views
             this.releaseTime = this.article.releaseTime
+            this.gameId = this.article.gameId
+            this.userId = this.article.userId
             this.getclassification(this.classification)
+            this.getGame(this.gameId)
+            this.getUser(this.userId)
         })
     },
     getclassification(classification){
@@ -117,6 +178,55 @@ export default {
           this.section = "攻略"
           break;
       }
+    },
+    getGame(gameId){
+      axios({
+        url:"http://192.168.137.44:10086/games/viewgame",
+        method:'post',
+        headers:{
+        'accept': "application/json",
+    },
+        data:{
+        id:gameId
+        }})
+        .then(res=>{
+            this.gameList = res.data.data.Game;
+            this.tagList = res.data.data.Tags;
+            this.name = this.gameList[0].name;
+            this.cover = this.gameList[0].cover;
+            this.score = this.gameList[0].score;
+        })
+    },
+    getUser(userId){
+      axios({
+        url:"http://192.168.137.44:10086/user/brief",
+        method:'post',
+        headers:{
+        'accept': "application/json",
+    },
+        data:{
+        id:userId
+        }})
+        .then(res=>{
+          this.userName = res.data.data.user.userName
+          this.icon = res.data.data.user.icon
+          this.sex = res.data.data.user.sex
+        })
+    },
+    getComment(){
+      let id = this.$route.query.id
+      axios({
+        url:"http://192.168.137.44:10086/information/querycomments",
+        method:'post',
+        headers:{
+        'accept': "application/json",
+    },
+        data:{
+        id:id
+        }})
+        .then(res=>{
+          this.commentList = res.data.data.user.commentEntityList
+        })
     },
     uploadBefore(f) {
           if (f.size > 7355608) {
@@ -161,6 +271,10 @@ export default {
             }
           })
     },
+    // submit(){
+    //   const token =  localStorage.getItem("token");
+    //   const userId =  localStorage.getItem("userId");
+    // },
     likeIt(){
         this.flag = !this.flag
         if(this.flag){
@@ -171,14 +285,16 @@ export default {
       }
     },
     toGame(){
-      this.$router.push({
-        path:"/game",
-        query:{game:this.gameName}
-      })
-    }
-  },
+        let id = this.gameId
+        this.$router.push({
+          path:"/game",
+          query:{id:id}
+        })
+      },
+    },
   mounted(){
     this.getContent()
+    this.getComment()
     // console.log(this.$route.query.id)
     // let id = this.$route.query.id
     // this.id = id
@@ -256,18 +372,60 @@ export default {
 }
 .mainbody{
   flex:3;
-  margin-left: 300px;
-  margin-right: 20px;
+  margin-left: 320px;
+  margin-right: 25px;
 }
 .article{
+  
   margin: auto;
   background-color: white;
 }
-.author{
+.comments{
+  margin: auto;
+  height: 200px;
+  margin-top: 10px;
+  background-color: white;
+}
+.extra{
   flex:1;
+  display: flex;
+  flex-direction:column;
   align-items:flex-start;
   margin-right: 120px;
+  
+}
+.author{
+  display: flex;
+  padding: 15px 10px 15px 10px;
+  margin-bottom: 10px;
+  width: 340px;
   background-color: white;
+  border-radius: 10px 10px 10px 10px;
+
+}
+
+.gameInf{
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 340px;
+  height: 220px;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+}
+.gameName{
+  width: 160px;
+  cursor:pointer;
+}
+.gamecover{
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor:pointer;
+}
+.cover{
+  width: 134px;
+  height: 172px;
+  object-fit:fill;
 }
 .inf{
   padding:10px 25px 10px 25px;
@@ -295,10 +453,9 @@ export default {
 
 }
 .content{
-  padding:40px 50px;
-  margin: auto;
+  padding:40px 40px;
+  width: 640px;
   white-space: pre-wrap;
-  margin: auto;
 }
 .like-btn{
   margin: 0 auto;
@@ -326,5 +483,43 @@ export default {
   flex:5;
   text-align: right;
   margin-right:20px;
+}
+.keybox{
+    margin-right: 16px;
+}
+.score{
+    margin:20px 5px 5px 10px; 
+}
+.key{
+    color: coral;
+    font-size: 40px;
+    line-height:1.5;
+    font-family: 华文新魏;
+}
+.str{
+    color:coral;
+    font-size: 20px;
+    font-family: 华文琥珀;
+}
+.user{
+    width: 70px;
+    height: 70px;
+    background-color: #8c939d;
+    margin-right: 24px;
+    margin-left: 20px;
+    overflow: hidden;
+    border-radius: 35px;
+    border: solid 1px #b9c0c9;
+  }
+.userIcon{
+  width: 70px;
+  height: 70px;
+  object-fit:fill;
+}
+.comment{
+  margin:8px auto;
+  padding: 6px 20px 2px 10px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  cursor:pointer;
 }
 </style>

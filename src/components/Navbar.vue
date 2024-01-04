@@ -24,7 +24,7 @@
         <b-dropdown :text="nickname" variant="dark" class="user" size="sm" v-if="flag">
            <b-dropdown-item href="#" @click="toNext">个人中心</b-dropdown-item>
            <b-dropdown-item href="#" @click="toNext">我的文章</b-dropdown-item>
-           <b-dropdown-item href="#" @click="toNext">我的点赞</b-dropdown-item>
+           <b-dropdown-item href="#" @click="toNext">我的收藏</b-dropdown-item>
            <b-dropdown-item href="#" @click="logOut">登出</b-dropdown-item>
         </b-dropdown>
       </div>
