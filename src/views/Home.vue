@@ -49,7 +49,6 @@
 
 <script>
 import Carousel from '@/components/Carousel.vue'
-import axios from "axios";
 export default {
     name: 'Home',
     data(){
@@ -70,8 +69,8 @@ export default {
     methods:{
 
       getNew(){
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -90,8 +89,8 @@ export default {
     },
 
       getloverecommend(){
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -110,8 +109,8 @@ export default {
       },
 
       getrecentrecommend(){
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",

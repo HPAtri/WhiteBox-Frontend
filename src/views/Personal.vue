@@ -112,7 +112,6 @@
 </template>
 
 <script>
-  import axios from "axios";
   export default {
     data() {
       return {
@@ -177,8 +176,8 @@
         if(localStorage.getItem("activeName")){
           this.activeName = localStorage.getItem("activeName");
         }
-        axios({
-        url:"http://192.168.137.44:10086/user/homepage",
+          this.$axios({
+        url:"/user/homepage",
         method:'get',
         headers:{
         'accept': "application/json",
@@ -192,18 +191,18 @@
             this.birthday=this.userList[0].birthday;
             this.profile=this.userList[0].profile;
             this.icon=this.userList[0].icon;
-            if(this.userList[0].sex==0){
+            if(this.userList[0].sex===0){
               this.sex="女";
             }
-            if(this.userList[0].sex==1){
+            if(this.userList[0].sex===1){
               this.sex="男";
             }
-            if(this.userList[0].sex==-1){
+            if(this.userList[0].sex===-1){
               this.sex="不愿透露";
             }
         });
-        axios({
-        url:"http://192.168.137.44:10086/user/myarticles",
+        this.$axios({
+        url:"/user/myarticles",
         method:'get',
         headers:{
         'accept': "application/json",
@@ -235,8 +234,8 @@
     submitForm(){
       const token =  localStorage.getItem("token");
       const userId =  localStorage.getItem("userId");
-      axios({
-        url:"http://192.168.137.44:10086//user/updateuser",
+      this.$axios({
+        url:"//user/updateuser",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -251,7 +250,7 @@
           birthday : this.updateform.birthday,
           phoneNumber : this.updateform.phoneNumber,
         }}).then((res) => {
-          if(res.data.data.retCode == "0000"){
+          if(res.data.data.retCode === "0000"){
           this.$message({
           message: '修改成功',
           type: 'success'})
@@ -274,8 +273,8 @@
         const token =  localStorage.getItem("token");
         var formdata = new FormData();
         formdata.append('image', file.raw);
-        axios({
-            url: 'http://192.168.137.44:10086/picture/save',
+        this.$axios({
+            url: '/picture/save',
             method: 'post',
             headers: {
               'Content-Type': 'multipart/form-data',

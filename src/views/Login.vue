@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
 	name: 'Login',
 	data(){
@@ -46,8 +45,8 @@ export default {
 			let flag=this.rule()
 			let that = this
 			if(flag){
-				axios({
-					url:"http://192.168.137.44:10086/user/login",
+        this.$axios({
+					url:"/user/login",
 					method:'post',
 					headers:{'accept': "application/json"},
 					data:{
@@ -57,7 +56,7 @@ export default {
 				}
 				)
 			.then(function(res){
-			if(res.data.data.retCode == "0000"){
+			if(res.data.data.retCode === "0000"){
 				localStorage.setItem("token", res.data.data.token);
 				localStorage.setItem("userId", res.data.data.userId);
 				alert("登录成功，点击确定跳转首页")
@@ -66,16 +65,16 @@ export default {
 				that.$router.go(0)
 			});
 			}
-			if(res.data.data.retCode == "9902"){
+			if(res.data.data.retCode === "9902"){
 				alert("账号不存在")
 			}
-			if(res.data.data.retCode == "9903"){
+			if(res.data.data.retCode === "9903"){
 				alert("密码错误")
 			}
-			if(res.data.data.retCode == "9904"){
+			if(res.data.data.retCode === "9904"){
 				alert("账号已被封禁,解封时间"+res.data.data.limit)
 			}
-			if(res.data.data.retCode == "9905"){
+			if(res.data.data.retCode === "9905"){
 				alert("登录失败")
 			}
 			})

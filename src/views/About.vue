@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data(){
     return{
@@ -59,8 +58,8 @@ export default {
   methods:{
       getArticle(){
         let classification = this.$route.query.classification
-        axios({
-        url:"http://192.168.137.44:10086/information/queryarticles",
+        this.$axios({
+        url:"/information/queryarticles",
         method:'post',
         headers:{
         'accept': "application/json",

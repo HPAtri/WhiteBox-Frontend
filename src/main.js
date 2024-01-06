@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios';
 import AV from 'leancloud-storage'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -27,6 +28,14 @@ AV.init({
 
 
 Vue.config.productionTip = false
+
+// 创建一个 Axios 实例
+const instance = axios.create({
+  baseURL: 'http://127.0.0.1:10086',
+});
+
+// 将 Axios 实例添加到 Vue 的原型链上
+Vue.prototype.$axios = instance;
 
 
 new Vue({

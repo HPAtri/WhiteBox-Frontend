@@ -107,7 +107,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data(){
     return{
@@ -145,8 +144,8 @@ export default {
   methods:{
     getContent(){
       let id = this.$route.query.articleId
-        axios({
-        url:"http://192.168.137.44:10086/information/viewarticle",
+        this.$axios({
+        url:"/information/viewarticle",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -185,8 +184,8 @@ export default {
       }
     },
     getGame(gameId){
-      axios({
-        url:"http://192.168.137.44:10086/games/viewgame",
+      this.$axios({
+        url:"/games/viewgame",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -203,8 +202,8 @@ export default {
         })
     },
     getUser(userId){
-      axios({
-        url:"http://192.168.137.44:10086/user/brief",
+      this.$axios({
+        url:"/user/brief",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -220,8 +219,8 @@ export default {
     },
     getComment(){
       let id = this.$route.query.articleId
-      axios({
-        url:"http://192.168.137.44:10086/information/querycomments",
+      this.$axios({
+        url:"/information/querycomments",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -251,8 +250,8 @@ export default {
           var formdata = new FormData();
           formdata.append('image', $file);
           const token =  localStorage.getItem("token");
-          axios({
-            url: 'http://192.168.137.44:10086/picture/save',
+          this.$axios({
+            url: '/picture/save',
             method: 'post',
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -284,8 +283,8 @@ export default {
       let articleId = this.$route.query.articleId
       let content = this.releaseForm.content
       if(content){
-      axios({
-        url:"http://192.168.137.44:10086/information/addcomment",
+        this.$axios({
+        url:"/information/addcomment",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -296,7 +295,7 @@ export default {
         articleId : articleId,
         commentContent : content
         }}).then((res) => {
-          if(res.data.data.retCode == "0000"){
+          if(res.data.data.retCode === "0000"){
           this.$message({
           message: '评论成功',
           type: 'success'})
@@ -314,7 +313,7 @@ export default {
         if(this.flag){
           this.like =  this.like+1
         }
-        if(this.flag==false){
+        if(this.flag===false){
           this.like = this.like-1
       }
     },

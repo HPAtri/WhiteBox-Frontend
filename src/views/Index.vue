@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data(){
       return{
@@ -39,8 +38,8 @@ export default {
   },
   methods:{
     gettags(){
-      axios({
-        url:"http://192.168.137.44:10086/games/gettags",
+      this.$axios({
+        url:"/games/gettags",
         method:'get',
         headers:{
         'accept': "application/json",
@@ -51,8 +50,8 @@ export default {
 
   },
     getAll(){
-      axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+      this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -104,8 +103,8 @@ export default {
     changeTag(str,index){
       this.flag = index
       let tagId = str.tagId
-      axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+      this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -143,7 +142,7 @@ export default {
   height: 120px;
 }
 .header{
-  border: 1px 1px 1px 1px rgba(0,0,0,0.6);
+  border: 1px rgba(0,0,0,0.6);
   padding-top:10px;
   width: 90%;
   margin: 0 auto;
