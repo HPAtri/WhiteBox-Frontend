@@ -265,7 +265,23 @@ export default {
           published: this.editForm.published,
         }})
           .then((res) => {
+            if (res.data.code === "2001") {
+              this.$router.push({
+                path:"/login",
+              })
+              alert(res.data.msg)
+            } else {
+              if (res.data.data.retCode === "0000") {
+                let id = res.data.data.articleId
+                this.$router.push({
+                  path:"/content",
+                  query:{articleId:id}
+                })
                 alert(res.data.data.retMsg)
+              } else {
+                alert(res.data.data.retMsg)
+              }
+            }
               }
           );
     },

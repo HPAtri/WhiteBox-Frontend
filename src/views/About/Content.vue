@@ -12,28 +12,54 @@
         <div class="empty"></div>
         <div class="view">
         <i class="el-icon-view">{{views}}</i>
+        </div>
+        <div class="time">
+          <i class="el-icon-time">{{releaseTime.slice(0, 10)}}</i>
+        </div>
       </div>
-      <div class="time">
-        <i class="el-icon-time">{{releaseTime.slice(0, 10)}}</i>
-      </div>
-      </div>
-      </div>
-    <h6 class="content">{{content}}</h6>
+    </div>
+    <mavon-editor
+        class="mavon"
+        ref=md
+        :toolbars-flag="toolbarsFlag"
+        :editable="editable"
+        :subfield="subfield"
+        :default-open="defaultOpen"
+        :value="content"
+        />
+<!--    <h6 class="content">{{content}}</h6>-->
 
     
   </div>
 
   <div class="release">
-    <div><mavon-editor
-              class="mavon"
-              ref="md"
-              @imgAdd="$imgAdd"
-              @imgDel="$imgDel"
-              :imageFilter="uploadBefore"
-              v-model="releaseForm.content"
-              /></div>
-  <div style="margin-top:10px; margin-left: 980px;"><el-button type="primary" style=" height:36px;width:90px; font-size: 12px;" @click="submit()">评论</el-button>
-  </div></div>
+    <div>
+      <el-input
+          type="textarea"
+          rows="4"
+          clearable
+          minlength="4"
+          maxlength="648"
+          show-word-limit
+          resize="none"
+          v-model="releaseForm.content"
+          placeholder="输入评论"
+          style="font-size: 16px">
+      </el-input>
+<!--      <mavon-editor-->
+<!--              class="mavon"-->
+<!--              ref="md"-->
+<!--              @imgAdd="$imgAdd"-->
+<!--              @imgDel="$imgDel"-->
+<!--              :imageFilter="uploadBefore"-->
+<!--              v-model="releaseForm.content"-->
+<!--              />-->
+    </div>
+    <div style="margin-top:10px; float: right">
+      <el-button type="primary" style=" height:36px;width:90px; font-size: 12px;" @click="submit()">评论</el-button>
+    </div>
+    <div style="margin-top:40px;"></div>
+  </div>
   <div class="comments">
     <div class="comment" v-for="(item,index) in userList" :key="index">
           <div>
@@ -139,6 +165,10 @@ export default {
       views:"",
       releaseTime:"",
       collect:"收藏帖子",
+      subfield: false,
+      toolbarsFlag: false,
+      editable: false,
+      defaultOpen: "preview"
     }
   },
   methods:{
@@ -234,49 +264,49 @@ export default {
           console.log(this.userList)
         })
     },
-    uploadBefore(f) {
-          if (f.size > 7355608) {
-            this.$message({
-              message: "图片过大",
-              type: "error"
-            });
-            return false;
-          } else {
-            return true;
-          }
-        },
-    $imgAdd(pos, $file){
-          // 将图片上传到服务器
-          var formdata = new FormData();
-          formdata.append('image', $file);
-          const token =  localStorage.getItem("token");
-          this.$axios({
-            url: '/picture/save',
-            method: 'post',
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'token':token
-            },
-            data:formdata,
-          }).then((res) => {
-            // 将返回的url替换到文本原位置![...](0) -> ![...](url)
-            if (res.status === 200) {
-              this.$refs.md.$img2Url(pos, res.data.data.url);
-            } else {
-              this.$message({
-                message: "图片上传失败",
-                type: "error"
-              }).catch(() => {
-                this.$message({
-                  message: "图片上传失败",
-                  type: "error"
-                });
-                this.$refs.md.$img2Url(pos, "");
-              });
-              this.$refs.md.$img2Url(pos, "");
-            }
-          })
-    },
+    // uploadBefore(f) {
+    //       if (f.size > 7355608) {
+    //         this.$message({
+    //           message: "图片过大",
+    //           type: "error"
+    //         });
+    //         return false;
+    //       } else {
+    //         return true;
+    //       }
+    //     },
+    // $imgAdd(pos, $file){
+    //       // 将图片上传到服务器
+    //       var formdata = new FormData();
+    //       formdata.append('image', $file);
+    //       const token =  localStorage.getItem("token");
+    //       this.$axios({
+    //         url: '/picture/save',
+    //         method: 'post',
+    //         headers: {
+    //           'Content-Type': 'multipart/form-data',
+    //           'token':token
+    //         },
+    //         data:formdata,
+    //       }).then((res) => {
+    //         // 将返回的url替换到文本原位置![...](0) -> ![...](url)
+    //         if (res.status === 200) {
+    //           this.$refs.md.$img2Url(pos, res.data.data.url);
+    //         } else {
+    //           this.$message({
+    //             message: "图片上传失败",
+    //             type: "error"
+    //           }).catch(() => {
+    //             this.$message({
+    //               message: "图片上传失败",
+    //               type: "error"
+    //             });
+    //             this.$refs.md.$img2Url(pos, "");
+    //           });
+    //           this.$refs.md.$img2Url(pos, "");
+    //         }
+    //       })
+    // },
     submit(){
       const token =  localStorage.getItem("token");
       const userId =  localStorage.getItem("userId");
@@ -421,6 +451,7 @@ export default {
 }
 .release{
   padding-top: 10px;
+  padding-bottom: 30px;
   margin: auto;
   
 }
