@@ -5,8 +5,10 @@
     <Carousel msg="轮播图" class="lunbo" />
     <div class="games">
        <div class="hot">
-         <h2>热门游戏</h2>
-         <div class="more-btn" @click="getNew()">换一批</div>
+<!--         <i class="el-icon-odometer"></i>-->
+         <h2 class="h2">热门游戏</h2>
+         <el-button class="more-btn" type="primary" round @click="getNew()">换一批</el-button>
+<!--         <div class="more-btn" @click="getNew()">换一批</div>-->
        </div>
       <div class="game" v-for="(item,index) in gameList" :key="index" @click="toGame(item.id)">
         <img :src="item.cover" class="game-img">
@@ -14,7 +16,11 @@
       </div>
     </div>
      <div class="games">
-       <div class="hot"><h2>根据您的喜好</h2><div class="more-btn" @click="getloverecommend()">换一批</div></div>
+       <div class="hot">
+         <h2 class="h2">根据您的喜好</h2>
+         <el-button class="more-btn" type="primary" round @click="getloverecommend()">换一批</el-button>
+<!--         <div class="more-btn" @click="getloverecommend()">换一批</div>-->
+       </div>
       <div class="game" v-for="(item,index) in loveList" :key="index" @click="toGame(item.id)">
         <img :src="item.cover" class="game-img">
         <h6 class="game-name">{{item.name}}</h6>
@@ -22,7 +28,11 @@
     </div>
 
     <div class="games">
-       <div class="hot"><h2>根据您的浏览</h2><div class="more-btn" @click="getrecentrecommend()">换一批</div></div>
+       <div class="hot">
+         <h2 class="h2">根据您的浏览</h2>
+         <el-button class="more-btn" type="primary" round @click="getrecentrecommend()">换一批</el-button>
+<!--         <div class="more-btn" @click="getrecentrecommend()">换一批</div>-->
+       </div>
       <div class="game" v-for="(item,index) in recentList" :key="index" @click="toGame(item.id)">
         <img :src="item.cover" class="game-img">
         <h6 class="game-name">{{item.name}}</h6>
@@ -49,7 +59,6 @@
 
 <script>
 import Carousel from '@/components/Carousel.vue'
-import axios from "axios";
 export default {
     name: 'Home',
     data(){
@@ -70,8 +79,8 @@ export default {
     methods:{
 
       getNew(){
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -82,7 +91,8 @@ export default {
           page:"1",
           tagId:0,
           needTag:false,
-          releaseTime:"2020-01-01 00:00:00"
+          releaseTime:"2020-01-01 00:00:00",
+          needHotGame:true
         }})
         .then(res=>{
           this.gameList = res.data.data.GameList;
@@ -90,8 +100,8 @@ export default {
     },
 
       getloverecommend(){
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -110,8 +120,8 @@ export default {
       },
 
       getrecentrecommend(){
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -158,6 +168,13 @@ export default {
   width:1500px;
   padding-bottom: 100px;
 }
+.h2{
+  color: #7a9bdd;
+}
+.el-icon-odometer{
+  color: black;
+
+}
 .hot{
   color: #fff;
   width: 100%;
@@ -167,7 +184,7 @@ export default {
 }
 .more-btn{
   padding: 5px 10px;
-  border: 1px solid #fff;
+  /*border: 1px solid #fff;*/
   cursor:pointer;
 }
 .lunbo{

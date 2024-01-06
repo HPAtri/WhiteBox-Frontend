@@ -27,7 +27,6 @@
 </template>
 	
 <script>
-import axios from "axios";
 export default {
 	name: 'Login',
 	data(){
@@ -67,8 +66,8 @@ export default {
 			let flag=this.rule()
 			let that = this
 			if(flag){
-				axios({
-				url:"http://192.168.137.44:10086/user/register",
+        this.$axios({
+				url:"/user/register",
 				method:'post',
 				headers:{'accept': "application/json"},
 				data:{
@@ -79,14 +78,14 @@ export default {
 				}
 				)
 			.then(function(res){
-			if(res.data.data.retCode == "0000"){
+			if(res.data.data.retCode === "0000"){
 				alert("注册成功，点击确定跳转登录");
 				setTimeout(function(){that.$router.push({path:"/Login"})});
 			}			
-			if(res.data.data.retCode == "9901"){
+			if(res.data.data.retCode === "9901"){
 				alert("用户名重复")
 			}
-			if(res.data.data.retCode == "9900"){
+			if(res.data.data.retCode === "9900"){
 				alert("未知错误")
 			}
 			})

@@ -83,7 +83,7 @@ export default {
 .top{
   width: 100%;
   background: rgba(1, 1, 1, 0.9);
-  z-index: 999;
+  z-index: 2000; /*这么大是为了防止mavoneditor显示在顶部栏的上层*/
   justify-content: space-between;
   padding:10px 40px;
   box-sizing: border-box;

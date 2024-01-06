@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
     data(){
         return{
@@ -40,8 +39,8 @@ export default {
         },
         getinfo(){
         const token =  localStorage.getItem("token");
-        axios({
-        url:"http://192.168.137.44:10086/user/homepage",
+          this.$axios({
+        url:"/user/homepage",
         method:'get',
         headers:{
         'accept': "application/json",

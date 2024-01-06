@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
     data(){
         return{
@@ -50,8 +49,8 @@ export default {
         else{
           tagId = 0
         }
-        axios({
-        url:"http://192.168.137.44:10086/games/querygames",
+        this.$axios({
+        url:"/games/querygames",
         method:'post',
         headers:{
         'accept': "application/json",

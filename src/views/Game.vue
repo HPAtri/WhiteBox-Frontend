@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
     data(){
         return{
@@ -136,8 +135,8 @@ export default {
     beforeMount(){
         let id = this.$route.query.id
         const token =  localStorage.getItem("token");
-        axios({
-        url:"http://192.168.137.44:10086/games/viewgame",
+        this.$axios({
+        url:"/games/viewgame",
         method:'post',
         headers:{
         'accept': "application/json",
@@ -157,8 +156,8 @@ export default {
             this.releaseTime = this.gameList[0].release_time;
             this.score = this.gameList[0].score;
         })
-        axios({
-        url:"http://192.168.137.44:10086/information/queryarticles",
+      this.$axios({
+        url:"/information/queryarticles",
         method:'post',
         headers:{
         'accept': "application/json",
