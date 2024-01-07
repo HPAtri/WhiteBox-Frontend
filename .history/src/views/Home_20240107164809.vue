@@ -3,7 +3,6 @@
   <div class="home">
     <el-dialog :title="recommendTitle" :visible.sync="recommendVisible" width="65%"  @close="closeForm()">
         <el-form :inline=true style="margin-left:20px;margin-right:20px;" label-width="110px" label-position="right" size="mini">
-          <div style="font-size: 26px; text-align: center;"><span>请选择感兴趣的游戏{{this.chooseList.length}}/5</span></div>
           <div class="recommend">
           <div class="game-recommend" v-for="(item,index) in recommendList" :key="index" @click="addChoose(item.id,index)">
         <img :src="item.cover" class="game-recommend-img">
@@ -11,7 +10,7 @@
       </div></div>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button type="primary" size="mini" @click="changeForm()">换一批</el-button>
+          <el-button type="info" size="mini" @click="changeForm()">换一批</el-button>
             <el-button type="info" size="mini" @click="closeForm()">不感兴趣</el-button>
         </span>
       </el-dialog>
@@ -80,16 +79,111 @@ export default {
         recentList:[],
         loveList:[],
         allRecommendList:[],
-        recommendList:[], //用于接受一页8个待选推荐
+        recommendList:[{
+				"id": 10,
+				"name": "赛博朋克2077",
+				"cover": "https://img.3dmgame.com/uploads/images/thumbkwdfirst/20201022/1603349350_903224.jpg",
+				"desc": null,
+				"createdAt": "2023-11-28T06:28:42.000+00:00",
+				"updatedAt": "2023-11-28T06:28:57.000+00:00",
+				"publisher": null,
+				"score": 2.5,
+				"releaseTime": "2023-11-28T06:28:15.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 9,
+				"name": "看门狗2",
+				"cover": "https://img.3dmgame.com/uploads/images/thumbkwdfirst/20180724/1532400033_147508.jpg",
+				"desc": null,
+				"createdAt": "2023-11-28T06:28:39.000+00:00",
+				"updatedAt": "2023-11-28T06:28:54.000+00:00",
+				"publisher": null,
+				"score": 3,
+				"releaseTime": "2023-11-28T06:28:13.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 8,
+				"name": "荒野大镖客2",
+				"cover": "https://img.3dmgame.com/uploads/images/thumbkwdfirst/20180709/1531115695_945701.jpg",
+				"desc": null,
+				"createdAt": "2023-11-28T06:28:36.000+00:00",
+				"updatedAt": "2023-11-28T06:28:51.000+00:00",
+				"publisher": null,
+				"score": 4,
+				"releaseTime": "2023-11-28T06:28:11.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 7,
+				"name": "文明6",
+				"cover": "https://img.3dmgame.com/uploads/images/thumbkwdfirst/20180724/1532412242_238190.jpg",
+				"desc": null,
+				"createdAt": "2023-11-28T06:28:26.000+00:00",
+				"updatedAt": "2023-11-28T06:28:49.000+00:00",
+				"publisher": null,
+				"score": 5,
+				"releaseTime": "2023-11-28T06:28:08.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 6,
+				"name": "尼尔：机械纪元",
+				"cover": "https://img.3dmgame.com/uploads/images/thumbkwdfirst/20180723/1532327846_923833.jpg",
+				"desc": null,
+				"createdAt": "2023-11-28T06:28:23.000+00:00",
+				"updatedAt": "2023-11-28T06:28:47.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-11-28T06:28:04.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 5,
+				"name": "极品飞车18：宿敌",
+				"cover": "https://img.3dmgame.com/uploads/images/thumbkwdfirst/20180522/1526960029_838372.jpg",
+				"desc": null,
+				"createdAt": "2023-11-28T06:28:20.000+00:00",
+				"updatedAt": "2023-11-28T06:28:44.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-11-28T06:28:00.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 4,
+				"name": "《反恐精英：全球攻势》 ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/29/2c/52356_9P9Vm.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:55:29.000+00:00",
+				"updatedAt": "2023-10-18T06:55:30.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:55:29.000+00:00",
+				"flag": 1
+			},
+			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			}], //用于接受一页8个待选推荐
         chooseList:[],  //用于存储所有选择游戏
-        recommendVisible:false,
+        recommendVisible:true,
       }
     },
     components: {
         Carousel
     },
     mounted(){
-      this.recommended()
+      // this.recommended()
       this.getNew()
       this.getloverecommend()
       this.getrecentrecommend()
@@ -99,8 +193,8 @@ export default {
         const recommended =  localStorage.getItem("recommended");
         if(recommended == 0){
           //mounted无法直接改变data()值
-          this.getRecommend()
           this.$data.recommendVisible = true;
+          this.getRecommend()
         }
         else
         {
@@ -125,7 +219,6 @@ export default {
         }})
         .then(res=>{
           this.allRecommendList = res.data.data.GameList;
-          this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
         })
       },
 
@@ -210,45 +303,22 @@ export default {
       },
       addChoose(gameId, index){
         this.chooseList.push(gameId)
-        console.log(this.allRecommendList)
-        this.allRecommendList[this.batch * 8 + index] = this.allRecommendList[this.allRecommendList.length-1]
+        this.allRecommendList[this.batch * 8 +index] = this.allRecommendList[-1]
         this.allRecommendList.pop()
-        console.log(this.allRecommendList)
         this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
         if(this.chooseList.length >= 5){
           this.recommendVisible = false
           localStorage.setItem("recommended", 1);
-          this.submitRecommendList()
         }
       },
       changeForm(){
         let i = Math.floor(this.allRecommendList.length / 8)
-        console.log(i)
         this.batch = (this.batch + 1) % i
-        console.log(this.batch)
-        this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
       },
       closeForm(){
       this.recommendVisible = false
       localStorage.setItem("recommended", 1);
-      this.submitRecommendList()
     },
-    //提交的接口
-    submitRecommendList(){
-      this.$axios({
-        url:"/games/choosegame",
-        method:'post',
-        headers:{
-        'accept': "application/json",
-      },
-        data:this.chooseList
-        })
-        .then(
-          this.$message({
-          message: '上传完毕',
-          type: 'success'})
-      )
-    }
     }
 }
 </script>

@@ -11,6 +11,7 @@
       </div></div>
         </el-form>
         <span slot="footer" class="dialog-footer">
+          <el-button type="info" size="mini" @click="load()">加载</el-button>
           <el-button type="primary" size="mini" @click="changeForm()">换一批</el-button>
             <el-button type="info" size="mini" @click="closeForm()">不感兴趣</el-button>
         </span>
@@ -82,14 +83,14 @@ export default {
         allRecommendList:[],
         recommendList:[], //用于接受一页8个待选推荐
         chooseList:[],  //用于存储所有选择游戏
-        recommendVisible:false,
+        recommendVisible:true,
       }
     },
     components: {
         Carousel
     },
     mounted(){
-      this.recommended()
+      // this.recommended()
       this.getNew()
       this.getloverecommend()
       this.getrecentrecommend()
@@ -99,8 +100,8 @@ export default {
         const recommended =  localStorage.getItem("recommended");
         if(recommended == 0){
           //mounted无法直接改变data()值
-          this.getRecommend()
           this.$data.recommendVisible = true;
+          this.getRecommend()
         }
         else
         {
@@ -125,7 +126,7 @@ export default {
         }})
         .then(res=>{
           this.allRecommendList = res.data.data.GameList;
-          this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
+          this.RecommendList = this.allRecommendList.slice(0,8);
         })
       },
 
@@ -233,10 +234,14 @@ export default {
       localStorage.setItem("recommended", 1);
       this.submitRecommendList()
     },
+    load(){
+      this.allRecommendList = this.allRecommendList2
+      this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
+    },
     //提交的接口
     submitRecommendList(){
       this.$axios({
-        url:"/games/choosegame",
+        url:"/games/choosegames",
         method:'post',
         headers:{
         'accept': "application/json",

@@ -236,7 +236,7 @@ export default {
     //提交的接口
     submitRecommendList(){
       this.$axios({
-        url:"/games/choosegame",
+        url:"/games/choosegames",
         method:'post',
         headers:{
         'accept': "application/json",

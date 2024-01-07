@@ -82,7 +82,7 @@ export default {
         allRecommendList:[],
         recommendList:[], //用于接受一页8个待选推荐
         chooseList:[],  //用于存储所有选择游戏
-        recommendVisible:false,
+        recommendVisible:true,
       }
     },
     components: {
@@ -236,7 +236,7 @@ export default {
     //提交的接口
     submitRecommendList(){
       this.$axios({
-        url:"/games/choosegame",
+        url:"/games/choosegames",
         method:'post',
         headers:{
         'accept': "application/json",

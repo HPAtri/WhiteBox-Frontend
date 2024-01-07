@@ -3,7 +3,6 @@
   <div class="home">
     <el-dialog :title="recommendTitle" :visible.sync="recommendVisible" width="65%"  @close="closeForm()">
         <el-form :inline=true style="margin-left:20px;margin-right:20px;" label-width="110px" label-position="right" size="mini">
-          <div style="font-size: 26px; text-align: center;"><span>请选择感兴趣的游戏{{this.chooseList.length}}/5</span></div>
           <div class="recommend">
           <div class="game-recommend" v-for="(item,index) in recommendList" :key="index" @click="addChoose(item.id,index)">
         <img :src="item.cover" class="game-recommend-img">
@@ -11,7 +10,8 @@
       </div></div>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button type="primary" size="mini" @click="changeForm()">换一批</el-button>
+          <el-button type="info" size="mini" @click="lo()">换一批</el-button>
+          <el-button type="info" size="mini" @click="changeForm()">换一批</el-button>
             <el-button type="info" size="mini" @click="closeForm()">不感兴趣</el-button>
         </span>
       </el-dialog>
@@ -79,17 +79,152 @@ export default {
         gameList:[],
         recentList:[],
         loveList:[],
-        allRecommendList:[],
+        allRecommendList:[
+          {
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},
+      {
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},          			{
+				"id": 3,
+				"name": "Counter-Strike 2  ",
+				"cover": "https://lain.bgm.tv/pic/cover/l/41/5f/425633_Qi0gw.jpg",
+				"desc": null,
+				"createdAt": "2023-10-18T06:54:32.000+00:00",
+				"updatedAt": "2023-10-18T06:54:32.000+00:00",
+				"publisher": null,
+				"score": 0,
+				"releaseTime": "2023-10-18T06:54:31.000+00:00",
+				"flag": 1
+			},
+        ],
         recommendList:[], //用于接受一页8个待选推荐
         chooseList:[],  //用于存储所有选择游戏
-        recommendVisible:false,
+        recommendVisible:true,
       }
     },
     components: {
         Carousel
     },
     mounted(){
-      this.recommended()
+      // this.recommended()
       this.getNew()
       this.getloverecommend()
       this.getrecentrecommend()
@@ -99,8 +234,8 @@ export default {
         const recommended =  localStorage.getItem("recommended");
         if(recommended == 0){
           //mounted无法直接改变data()值
-          this.getRecommend()
           this.$data.recommendVisible = true;
+          this.getRecommend()
         }
         else
         {
@@ -125,7 +260,7 @@ export default {
         }})
         .then(res=>{
           this.allRecommendList = res.data.data.GameList;
-          this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
+          this.RecommendList = this.allRecommendList.slice(0,8);
         })
       },
 
@@ -210,45 +345,23 @@ export default {
       },
       addChoose(gameId, index){
         this.chooseList.push(gameId)
-        console.log(this.allRecommendList)
-        this.allRecommendList[this.batch * 8 + index] = this.allRecommendList[this.allRecommendList.length-1]
+        this.allRecommendList[this.batch * 8 +index] = this.allRecommendList[-1]
         this.allRecommendList.pop()
-        console.log(this.allRecommendList)
         this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
         if(this.chooseList.length >= 5){
           this.recommendVisible = false
           localStorage.setItem("recommended", 1);
-          this.submitRecommendList()
         }
       },
       changeForm(){
         let i = Math.floor(this.allRecommendList.length / 8)
-        console.log(i)
         this.batch = (this.batch + 1) % i
-        console.log(this.batch)
         this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
       },
       closeForm(){
       this.recommendVisible = false
       localStorage.setItem("recommended", 1);
-      this.submitRecommendList()
     },
-    //提交的接口
-    submitRecommendList(){
-      this.$axios({
-        url:"/games/choosegame",
-        method:'post',
-        headers:{
-        'accept': "application/json",
-      },
-        data:this.chooseList
-        })
-        .then(
-          this.$message({
-          message: '上传完毕',
-          type: 'success'})
-      )
-    }
     }
 }
 </script>
