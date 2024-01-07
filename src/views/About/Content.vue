@@ -325,14 +325,30 @@ export default {
         articleId : articleId,
         commentContent : content
         }}).then((res) => {
-          if(res.data.data.retCode === "0000"){
-          this.$message({
-          message: '评论成功',
-          type: 'success'})
-          this.$router.go(0);
-        }else{
-          this.$message.error('评论失败');
-        }
+          if (res.data.code === "2001") {
+            localStorage.clear()
+            this.$router.push({
+              path:"/login",
+            })
+            alert(res.data.msg)
+          } else {
+            if (res.data.data.retCode === "0000") {
+              this.$message({
+                message: '评论成功',
+                type: 'success'})
+              this.$router.go(0);
+            } else {
+              alert(res.data.data.retMsg)
+            }
+          }
+        //   if(res.data.data.retCode === "0000"){
+        //   this.$message({
+        //   message: '评论成功',
+        //   type: 'success'})
+        //   this.$router.go(0);
+        // }else{
+        //   this.$message.error('评论失败');
+        // }
         })}
         else{
           this.$message.error('评论内容不能为空');

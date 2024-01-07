@@ -61,7 +61,7 @@ export default {
           page:"1",
           tagId:tagId,
           needTag:true,
-          releaseTime:"2020-01-01 00:00:00"
+          releaseTime:"2000-01-01 00:00:00"
         }})
         .then(res=>{
             this.gameList = res.data.data.GameList;

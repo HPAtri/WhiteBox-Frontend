@@ -37,6 +37,26 @@ const instance = axios.create({
 // 将 Axios 实例添加到 Vue 的原型链上
 Vue.prototype.$axios = instance;
 
+// 在axios的响应拦截器中进行跳转判断
+instance.interceptors.response.use(
+    response => {
+      const data = response.data;
+
+      // 根据数据包中的字段进行跳转判断
+      if (data.code === "2001") {
+        localStorage.clear()
+        this.$router.push({
+          path:"/login",
+        }) // 执行跳转
+        alert(response.data.msg)
+      }
+      return response;
+    },
+    error => {
+      return Promise.reject(error);
+    }
+);
+
 
 new Vue({
   router,
