@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="game">
-            <img :src="cover" class="header">
+            <img :src="head" class="header">
             <h3 class="name">游戏名：{{name}}</h3>
             <div class="info">
                 <div class="info-detail">
@@ -13,8 +13,8 @@
                   <span>{{releaseTime}}</span>
                 </div>
                <div class="info-detail">
-                  <span class="info-name">平台：</span>
-                  <span>{{platform}}</span>
+                  <span class="info-name"></span>
+                  <span></span>
                 </div>
             </div>
             <div class="info-detail detail">
@@ -75,6 +75,7 @@ export default {
             collect:"加入收藏",
             value:0,
             cover:"",
+            head:"",
             publisher:"",
             releaseTime:"",
             platform:"",
@@ -151,10 +152,12 @@ export default {
             this.gameid = this.gameList[0].id;
             this.name = this.gameList[0].name;
             this.cover = this.gameList[0].cover;
+            this.head = this.gameList[0].head;
             this.publisher = this.gameList[0].publisher;
             this.description = this.gameList[0].desc;
             this.releaseTime = this.gameList[0].release_time;
             this.score = this.gameList[0].score;
+          console.log(this.gameList[0].desc)
         })
       this.$axios({
         url:"/information/queryarticles",
@@ -299,7 +302,7 @@ export default {
 .detail{
     padding: 0 40px 40px 40px; 
     font-size: 20px;
-    color: #fff;
+
 }
 .el-rate  /deep/ .el-rate__icon{
   font-size: 25px;

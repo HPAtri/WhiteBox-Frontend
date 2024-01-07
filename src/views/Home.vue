@@ -142,7 +142,7 @@ export default {
           page:"1",
           tagId:0,
           needTag:false,
-          releaseTime:"2020-01-01 00:00:00",
+          releaseTime:"2000-01-01 00:00:00",
           needHotGame:true
         }})
         .then(res=>{
@@ -163,7 +163,7 @@ export default {
           page:"1",
           tagId:0,
           needTag:false,
-          releaseTime:"2020-01-01 00:00:00"
+          releaseTime:"2000-01-01 00:00:00"
         }})
         .then(res=>{
           this.loveList = res.data.data.GameList;
@@ -183,7 +183,7 @@ export default {
           page:"1",
           tagId:0,
           needTag:false,
-          releaseTime:"2020-01-01 00:00:00"
+          releaseTime:"2000-01-01 00:00:00"
         }})
         .then(res=>{
           this.recentList = res.data.data.GameList;

@@ -199,7 +199,7 @@ export default {
           page:"1",
           tagId:0,
           needTag:false,
-          releaseTime:"2020-01-01 00:00:00"
+          releaseTime:"2000-01-01 00:00:00"
         }})
           .then(res=>{
             for(var i = 0 ;i < res.data.data.GameList.length ;i++){
@@ -266,6 +266,7 @@ export default {
         }})
           .then((res) => {
             if (res.data.code === "2001") {
+              localStorage.clear()
               this.$router.push({
                 path:"/login",
               })
