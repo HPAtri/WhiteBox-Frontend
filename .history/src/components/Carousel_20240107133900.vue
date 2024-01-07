@@ -16,9 +16,9 @@ export default {
   data(){
     return{
       carouselItems:[
-        {title:"尼尔机械纪元正在促销",
-        info:"《NieR:Automata》讲述了机器人 2B、9S 和 A2 的故事，以及他们为夺回遭强大机械生命体占领、由机器驱动的反乌托邦而进行的战斗。",
-        url:"https://p3.img.cctvpic.com/photoAlbum/page/performance/img/2022/4/1/1648803642976_981.jpg"},
+        {title:"博德之门3荣获TGA年度游戏",
+        info:"《Baldur's Gate 3》讲述了机器人 2B、9S 和 A2 的故事，以及他们为夺回遭强大机械生命体占领、由机器驱动的反乌托邦而进行的战斗。",
+        url:"https://mms0.baidu.com/it/u=229321662,1311101547&fm=253&app=120&f=JPEG?w=1423&h=800"},
         {title:"战地5 Origin低至三折",
         info:"加入《战地风云 5》，体验人类史上最大的战争，并随著《战地风云》系列一起追本溯源，以前所未见的角度重临二次世界大战。",
         url:"https://media.st.dl.eccdnx.com/steam/apps/770810/ss_bfd46c839a2128195b7bb367f3d4a4c505ea81bc.1920x1080.jpg"},
@@ -50,7 +50,7 @@ export default {
   background: rgba(1, 1, 1, 0.3);
 }
 .carousel-item{
-  height:500px;
+  height:600px;
 }
 
 li:focus{ outline:none; }

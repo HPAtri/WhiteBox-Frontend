@@ -1,7 +1,20 @@
 <template>
   
   <div class="home">
-    
+    <el-dialog :title="recommendTitle" :visible.sync="recommendVisible" width="65%"  @close="closeForm()">
+        <el-form :inline=true style="margin-left:20px;margin-right:20px;" label-width="110px" label-position="right" size="mini">
+          <div style="font-size: 26px; text-align: center;"><span>请选择感兴趣的游戏{{this.chooseList.length}}/5</span></div>
+          <div class="recommend">
+          <div class="game-recommend" v-for="(item,index) in recommendList" :key="index" @click="addChoose(item.id,index)">
+        <img :src="item.cover" class="game-recommend-img">
+        <h6 class="game-name">{{item.name}}</h6>
+      </div></div>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" size="mini" @click="changeForm()">换一批</el-button>
+            <el-button type="info" size="mini" @click="closeForm()">不感兴趣</el-button>
+        </span>
+      </el-dialog>
     <Carousel msg="轮播图" class="lunbo" />
     <div class="games">
        <div class="hot">
@@ -54,7 +67,6 @@
        </div>
     </el-backtop>
   </div>
-  
 </template>
 
 <script>
@@ -63,20 +75,59 @@ export default {
     name: 'Home',
     data(){
       return{
+        batch:0,
         gameList:[],
         recentList:[],
         loveList:[],
+        allRecommendList:[],
+        recommendList:[], //用于接受一页8个待选推荐
+        chooseList:[],  //用于存储所有选择游戏
+        recommendVisible:false,
       }
     },
     components: {
         Carousel
     },
     mounted(){
+      this.recommended()
       this.getNew()
       this.getloverecommend()
       this.getrecentrecommend()
     },
     methods:{
+      recommended(){
+        const recommended =  localStorage.getItem("recommended");
+        if(recommended == 0){
+          //mounted无法直接改变data()值
+          this.getRecommend()
+          this.$data.recommendVisible = true;
+        }
+        else
+        {
+          this.$data.recommendVisible = false;
+          }
+      },
+      getRecommend(){
+        this.$axios({
+        url:"/games/querygames",
+        method:'post',
+        headers:{
+        'accept': "application/json",
+      },
+        data:{
+          name:"",
+          limit:"8",
+          page:"1",
+          tagId:0,
+          needTag:false,
+          releaseTime:"2020-01-01 00:00:00",
+          needHotGame:true
+        }})
+        .then(res=>{
+          this.allRecommendList = res.data.data.GameList;
+          this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
+        })
+      },
 
       getNew(){
         this.$axios({
@@ -156,7 +207,48 @@ export default {
         this.$router.push({
           path:"/about"
         })
-      }
+      },
+      addChoose(gameId, index){
+        this.chooseList.push(gameId)
+        console.log(this.allRecommendList)
+        this.allRecommendList[this.batch * 8 + index] = this.allRecommendList[this.allRecommendList.length-1]
+        this.allRecommendList.pop()
+        console.log(this.allRecommendList)
+        this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
+        if(this.chooseList.length >= 5){
+          this.recommendVisible = false
+          localStorage.setItem("recommended", 1);
+          this.submitRecommendList()
+        }
+      },
+      changeForm(){
+        let i = Math.floor(this.allRecommendList.length / 8)
+        console.log(i)
+        this.batch = (this.batch + 1) % i
+        console.log(this.batch)
+        this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
+      },
+      closeForm(){
+      this.recommendVisible = false
+      localStorage.setItem("recommended", 1);
+      this.submitRecommendList()
+    },
+    //提交的接口
+    submitRecommendList(){
+      this.$axios({
+        url:"/games/choosegames",
+        method:'post',
+        headers:{
+        'accept': "application/json",
+      },
+        data:this.chooseList
+        })
+        .then(
+          this.$message({
+          message: '上传完毕',
+          type: 'success'})
+      )
+    }
     }
 }
 </script>
@@ -200,7 +292,7 @@ export default {
   flex-wrap:wrap ;
 }
 .game{
-  margin-top: 40px;
+  margin-top: 20px;
   width: 280px;
   height: 400px;
   color: #fff;
@@ -218,6 +310,22 @@ export default {
 .game-name{
   text-align: left;
   margin: 5px 0 0 0;
+}
+.game-recommend{
+  margin-top: 20px;
+  width: 224px;
+  height: 320px;
+  color: #fff;
+  background: rgb(34, 34, 34);
+}
+.game-recommend:hover{
+  box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
+  cursor:pointer;/*鼠标指针变为一个手*/ 
+}
+.game-recommend-img{
+  width: 100%;
+  height: 296px;
+  object-fit: cover;
 }
 .classify{
   width: 60px;
@@ -256,5 +364,12 @@ export default {
 .info:hover{
   box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
   cursor:pointer;/*鼠标指针变为一个手*/ 
+}
+.recommend{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    flex-wrap: wrap;
 }
 </style>
