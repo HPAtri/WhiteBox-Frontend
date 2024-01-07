@@ -116,12 +116,12 @@ export default {
       },
         data:{
           name:"",
-          limit:"8",
+          limit:0,
           page:"1",
           tagId:0,
           needTag:false,
-          releaseTime:"2020-01-01 00:00:00",
-          needHotGame:true
+          releaseTime:"2000-01-01 00:00:00",
+          needRand:true
         }})
         .then(res=>{
           this.allRecommendList = res.data.data.GameList;
@@ -218,7 +218,7 @@ export default {
         if(this.chooseList.length >= 5){
           this.recommendVisible = false
           localStorage.setItem("recommended", 1);
-          this.submitRecommendList()
+
         }
       },
       changeForm(){

@@ -59,7 +59,7 @@ export default {
 			if(res.data.data.retCode === "0000"){
 				localStorage.setItem("token", res.data.data.token);
 				localStorage.setItem("userId", res.data.data.userId);
-				localStorage.setItem("recommended", res.data.data.userId);
+				localStorage.setItem("recommended", res.data.data.recommended);
 				alert("登录成功，点击确定跳转首页")
 				setTimeout(function(){
 				that.$router.push({path:"/"})
