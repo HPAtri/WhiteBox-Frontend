@@ -228,14 +228,34 @@ export default {
     },
     //提交的接口
     submitRecommendList(){
+        // for (var i=0;i<this.chooseList.length;i++) {
+      //     this.$axios({
+      //       url:"/user/addcollect",
+      //       method:'post',
+      //       headers:{
+      //         'token':localStorage.getItem("token"),
+      //         'accept': "application/json",
+      //       },
+      //       data:{
+      //         userId:localStorage.getItem("userId"),
+      //         gameId:this.chooseList[i]
+      //       }
+      //     })
+      //   }
+      // this.$message({
+      //   message: '上传完毕',
+      //   type: 'success'})
       this.$axios({
-        url:"/games/choosegame",
+        url:"/user/choosegame",
         method:'post',
         headers:{
           'token':localStorage.getItem("token"),
         'accept': "application/json",
       },
-        data:this.chooseList
+        data:{
+          userId:localStorage.getItem("userId"),
+          chooseList:this.chooseList
+        }
         })
         .then(
           this.$message({
