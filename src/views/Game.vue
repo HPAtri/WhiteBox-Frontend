@@ -175,7 +175,7 @@ export default {
         data:{
             userId:userId,
             gameId:gameId,
-            score:this.value
+            rate:this.value
         }})
         .then(res=>{
             if(res.data.data.retCode === "0000") 
