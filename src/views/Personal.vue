@@ -229,8 +229,8 @@
       console.log(this.articleId);
       let id = articleId
       this.$router.push({
-        path:"/about/content",
-        query:{id:id}
+        path:"/content",
+        query:{articleId:id}
       })
     },
     getCollect(){

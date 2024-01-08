@@ -3,7 +3,7 @@
   <div class="home">
     <el-dialog :title="recommendTitle" :visible.sync="recommendVisible" width="65%"  @close="closeForm()">
         <el-form :inline=true style="margin-left:20px;margin-right:20px;" label-width="110px" label-position="right" size="mini">
-          <div style="font-size: 26px; text-align: center;"><span>请选择感兴趣的游戏{{this.chooseList.length}}/5</span></div>
+          <div style="font-size: 26px; text-align: center;"><span>请选择感兴趣的游戏{{this.chooseList.length}}/8</span></div>
           <div class="recommend">
           <div class="game-recommend" v-for="(item,index) in recommendList" :key="index" @click="addChoose(item.id,index)">
         <img :src="item.cover" class="game-recommend-img">
@@ -152,21 +152,16 @@ export default {
 
       getloverecommend(){
         this.$axios({
-        url:"/games/querygames",
+        url:"/games/recommendgames",
         method:'post',
         headers:{
         'accept': "application/json",
       },
         data:{
-          name:"",
-          limit:"4",
-          page:"1",
-          tagId:0,
-          needTag:false,
-          releaseTime:"2000-01-01 00:00:00"
+          id:localStorage.getItem("userId"),
         }})
         .then(res=>{
-          this.loveList = res.data.data.GameList;
+          this.loveList = res.data.data.recommendedGames;
         })
       },
 
@@ -237,6 +232,7 @@ export default {
         url:"/games/choosegame",
         method:'post',
         headers:{
+          'token':localStorage.getItem("token"),
         'accept': "application/json",
       },
         data:this.chooseList

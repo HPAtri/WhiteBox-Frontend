@@ -53,9 +53,10 @@ export default {
     },
     logOut(){
       localStorage.clear()
-      this.$router.push({
-        path:"/login"
-      });
+      // this.$router.push({
+      //   path:"/login"
+      // });
+      this.$router.go(0);
     },
     search(){
       if(this.find){

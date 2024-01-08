@@ -11,8 +11,8 @@
 		<label>密码</label>
 		</div>
 		<div class="log-btn">
-		<b-button type="submit" @click="login">登录</b-button>
-		<router-link to="/register"><b-button id="link-reg">注册</b-button></router-link>	
+		<el-button type="primary" @click="login">登录</el-button>
+		<router-link to="/register"><el-button id="link-reg">注册</el-button></router-link>
 		</div>
 	</form>
 </div>

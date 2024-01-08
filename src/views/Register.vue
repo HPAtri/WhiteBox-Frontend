@@ -19,7 +19,7 @@
 			<label>再次输入</label>
 			</div>
 			<div class="reg-button">
-			<b-button type="submit" @click="reg">注册</b-button>
+			<el-button type="submit" @click="reg">注册</el-button>
 			<router-link to="/login">已有账号，登录 ></router-link>  
 			</div>
 		</form>
