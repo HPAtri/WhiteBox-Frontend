@@ -128,7 +128,6 @@ export default {
           this.allRecommendList = res.data.data.GameList;
           console.log(this.allRecommendList)
           this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
-          this.i = Math.floor(this.allRecommendList.length / 8) - 1
         })
       },
 
@@ -220,7 +219,8 @@ export default {
         }
       },
       changeForm(){
-        this.batch = (this.batch + 1) % this.i
+        let i = Math.floor(this.allRecommendList.length / 8) - 1
+        this.batch = (this.batch + 1) % i
         this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
       },
       closeForm(){

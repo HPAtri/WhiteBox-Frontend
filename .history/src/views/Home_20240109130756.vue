@@ -220,6 +220,7 @@ export default {
         }
       },
       changeForm(){
+        
         this.batch = (this.batch + 1) % this.i
         this.recommendList = this.allRecommendList.slice(this.batch * 8,(this.batch + 1) * 8)
       },

@@ -33,11 +33,76 @@ export default {
           flag:"all",
           gameList:[],
           gameAll:[],
-          tagList:[],
+          tagList:[{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},],
       }
   },
   created(){
-    this.gettags()
+    // this.gettags()
     this.getAll()
   },
   methods:{
@@ -167,15 +232,14 @@ export default {
 }
 .classify{
     display: flex;
-    width: 100%;
+    width: 90%;
     margin-top:20px;
-    margin-bottom:5px;
+    margin-bottom:20px;
     align-items:flex-start;
     min-height: 20px;
 }
 .tagtitle{
   flex: 1;
-  margin-left: 10px;
   height: 28px;
 }
 
@@ -188,7 +252,7 @@ export default {
 }
 .c-item{
   margin-left: 15px;
-  height: 30px;
+  
   width: auto;
   cursor:pointer;
 }

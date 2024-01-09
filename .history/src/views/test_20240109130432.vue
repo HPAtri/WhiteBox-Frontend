@@ -6,7 +6,7 @@
         <div class="u">123</div>   
         <div class="u">123</div>   
         <div class="u">123</div>   
-        <div>
+        <div class="PersonTop_img">
           <el-button type="primary" size="mini" @click="changeForm()">换一批</el-button>
         </div>
     </div>
@@ -45,10 +45,6 @@
         console.log(this.list);
       },
       methods: {
-        changeForm(){
-          let i = Math.floor(23 / 8) - 1
-          console.log(i)
-        },
         remoteMethod(query) {
           console.log(this.list)
           if (query !== '') {

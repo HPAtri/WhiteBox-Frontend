@@ -37,7 +37,7 @@ export default {
       }
   },
   created(){
-    this.gettags()
+    // this.gettags()
     this.getAll()
   },
   methods:{

@@ -33,11 +33,76 @@ export default {
           flag:"all",
           gameList:[],
           gameAll:[],
-          tagList:[],
+          tagList:[{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},],
       }
   },
   created(){
-    this.gettags()
+    // this.gettags()
     this.getAll()
   },
   methods:{
@@ -167,28 +232,28 @@ export default {
 }
 .classify{
     display: flex;
-    width: 100%;
+    width: 90%;
     margin-top:20px;
-    margin-bottom:5px;
+    margin-bottom:20px;
     align-items:flex-start;
     min-height: 20px;
 }
 .tagtitle{
   flex: 1;
-  margin-left: 10px;
   height: 28px;
 }
 
 .tags{
   width: auto;
-  flex: 30;
   display: flex;
+  flex: 30;
   align-items: center;
   flex-wrap: wrap;
+  height: 28px;
 }
 .c-item{
   margin-left: 15px;
-  height: 30px;
+  
   width: auto;
   cursor:pointer;
 }
@@ -224,6 +289,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  flex-direction:row;
   width: 60px;
   margin-right: 5px;
   font-size:12px;

@@ -5,14 +5,12 @@
       <div class="classify">
           <div class="tagtitle"><h6>标签:</h6></div>
           <div class="tags">
-          <div class="chooseTag">
-            <h6 :class="flag=='all'?'active':''" @click="orderBy('all')" class="c-item">全部</h6>
-          </div>
-          <div class="chooseTag"  v-for="(item,index) in tagList" :key="index" 
+          <div class="chooseTag"><h6 :class="flag=='all'?'active':''" @click="orderBy('all')" class="c-item">全部</h6>
+          </div><div class="chooseTag"><div   v-for="(item,index) in tagList" :key="index" 
           @click="changeTag(item,index)" :class="flag==index?'active':''"
           >
           <h6 class="c-item">{{item.tagName}}</h6>
-        </div>
+        </div></div>
           </div>
       </div>
       </div>
@@ -33,11 +31,76 @@ export default {
           flag:"all",
           gameList:[],
           gameAll:[],
-          tagList:[],
+          tagList:[{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},{
+					"tagId": 3,
+					"tagName": "第一人称射击游戏",
+					"num": 1,
+					"desc": "FPS"
+				},],
       }
   },
   created(){
-    this.gettags()
+    // this.gettags()
     this.getAll()
   },
   methods:{
@@ -146,12 +209,12 @@ export default {
   height: 120px;
 }
 .header{
-  display: flex;
   border: 1px rgba(0,0,0,0.6);
   padding-top:10px;
   width: 90%;
   margin: 0 auto;
   background:#ebe7e7;
+
 }
 .main{
     display: flex;
@@ -167,28 +230,24 @@ export default {
 }
 .classify{
     display: flex;
-    width: 100%;
+    width: 90%;
     margin-top:20px;
-    margin-bottom:5px;
-    align-items:flex-start;
-    min-height: 20px;
+    align-items:flex-start
 }
 .tagtitle{
   flex: 1;
-  margin-left: 10px;
-  height: 28px;
 }
 
 .tags{
   width: auto;
-  flex: 30;
   display: flex;
+  flex: 30;
   align-items: center;
+  margin: auto;
   flex-wrap: wrap;
 }
 .c-item{
   margin-left: 15px;
-  height: 30px;
   width: auto;
   cursor:pointer;
 }
@@ -221,18 +280,13 @@ export default {
   margin: 5px 0 0 0;
 }
 .tags{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   width: 60px;
+  height: 20px;
   margin-right: 5px;
   font-size:12px;
   padding: 2px 4px;
 }
 .active{
     color: burlywood;
-}
-.chooseTag{
-  height: auto;
 }
 </style>

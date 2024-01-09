@@ -33,11 +33,11 @@ export default {
           flag:"all",
           gameList:[],
           gameAll:[],
-          tagList:[],
+          tagList:[,],
       }
   },
   created(){
-    this.gettags()
+    // this.gettags()
     this.getAll()
   },
   methods:{

@@ -46,8 +46,8 @@
       },
       methods: {
         changeForm(){
-          let i = Math.floor(23 / 8) - 1
-          console.log(i)
+          let i = Math.floor(24 / 8) - 1
+          con
         },
         remoteMethod(query) {
           console.log(this.list)
