@@ -189,6 +189,11 @@ export default {
           query:{id:id}
         })
       },
+      toAbout(){
+        this.$router.push({
+          path:"/about"
+        })
+      },
       addChoose(gameId, index){
         this.chooseList.push(gameId)
         console.log(this.allRecommendList)

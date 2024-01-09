@@ -179,14 +179,26 @@ export default {
           id:localStorage.getItem("userId"),
         }})
         .then(res=>{
-          this.recentList = res.data.data.CollectGameRecommendGame;
+          this.recentList = res.data.data.GameList;
         })
+      },
+      toCon(artId){
+        let id = artId
+         this.$router.push({ 
+           path:'/about/content',
+           query: {id:id}
+           })
       },
        toGame(gameId){
         let id = gameId
         this.$router.push({
           path:"/game",
           query:{id:id}
+        })
+      },
+      toAbout(){
+        this.$router.push({
+          path:"/about"
         })
       },
       addChoose(gameId, index){
