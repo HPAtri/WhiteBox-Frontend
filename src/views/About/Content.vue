@@ -199,16 +199,16 @@ export default {
     },
     getclassification(classification){
       switch(classification){
-        case 1:
+        case 0:
           this.section = "全部"
           break;
-        case 2:
+        case 1:
           this.section = "精品"
           break;
-        case 3:
+        case 2:
           this.section = "杂谈"
           break;
-        case 4:
+        case 3:
           this.section = "攻略"
           break;
       }

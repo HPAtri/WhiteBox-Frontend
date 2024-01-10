@@ -70,6 +70,10 @@ export default {
         }})
         .then(res=>{
             this.artList = res.data.data.articleEntityList;
+          for (let i = 0; i < this.artList.length; i++) {
+            var regex = /!\[.*?\]\((.*?)\)/g;
+            this.artList[i].content = this.artList[i].content.replace(regex, "");
+          }
         })
     },
     pichandle(index){
